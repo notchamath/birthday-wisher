@@ -1,6 +1,15 @@
-import smtplib
 from dotenv import load_dotenv
+import smtplib
 import os
+import random
+import datetime as dt
+
+today = dt.datetime.now()
+
+if today.weekday() == 1:
+    with open("quotes.txt") as q_file:
+        quotes = q_file.readlines()
+        todays_quote = random.choice(quotes)
 
 load_dotenv('.env')
 
@@ -13,6 +22,6 @@ connection.starttls()
 connection.login(user=MY_EMAIL, password=PW)
 connection.sendmail(from_addr=MY_EMAIL,
                     to_addrs="chamath.contact@gmail.com",
-                    msg="Hello World")
+                    msg=f"Subject:Hello\n\n{todays_quote}")
 
 connection.close()
