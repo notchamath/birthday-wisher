@@ -1,8 +1,12 @@
 import smtplib
+from dotenv import load_dotenv
+import os
+
+load_dotenv('.env')
 
 HOST_SMTP = "smtp.gmail.com"
 MY_EMAIL = "notchamath@gmail.com"
-PW = "hahaha"
+PW = os.getenv("PW")
 
 connection = smtplib.SMTP(HOST_SMTP, port=587)
 connection.starttls()
